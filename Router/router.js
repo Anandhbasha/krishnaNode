@@ -1,24 +1,13 @@
 import express from 'express'
+import { deleteData, insert, read, update } from '../Controller/Controller.js'
 
 const route = express.Router()
 
-route.get('/',(req,res)=>{
-    res.status(200).json("Node is Working")
-})
+route.get('/',read)
 
-route.post("/",(req,res)=>{
-    const {userName,Password} = req.body
-    res.status(201).json("Data Inserted Successfully")
-})
+route.post("/",insert)
 
-route.put("/edit/:id",(req,res)=>{
-    const {Password} = req.body
-    const {id} = req.params
-    res.status(208).json("Updated Succesfully")
-})
-route.delete("/delete/:id",(req,res)=>{
-    const {id} = req.params
-    res.status(212).json("Deleted Succesfully")
-})
+route.put("/edit/:id",update)
+route.delete("/delete/:id",deleteData)
 
 export default route
