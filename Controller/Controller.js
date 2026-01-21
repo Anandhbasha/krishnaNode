@@ -1,10 +1,26 @@
-export const read = (req,res)=>{
-    res.status(200).json("Node is Working")
+import newUser from "../Model/crudSchema.js"
+
+export const read = async(req,res)=>{
+    try{
+        const readData = await newUser.find()
+        res.status(200).json(readData)
+    }catch(err){
+        res.status(409).json({message:"Unable to get Data"})
+    }
 }
 
-export const insert = (req,res)=>{
-    const {userName,Password} = req.body
-    res.status(201).json("Data Inserted Successfully")
+export const insert = async(req,res)=>{
+    try{
+        const {userName,userMobile,userPassword} = req.body
+        const exist = await newUser.findOne({userName})
+        if(exist){
+            res.status(403).json({message:"User Already exist"})
+        }
+        const addNew = await newUser({userName,userPassword,userMobile}).save()
+        res.status(201).json(addNew)
+    }catch(err){
+        res.status(408).json(err)
+    }
 }
 
 export const update = (req,res)=>{

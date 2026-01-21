@@ -5,7 +5,7 @@ const route = express.Router()
 
 route.get('/',read)
 
-route.post("/",insert)
+route.post("/insert",insert)
 
 route.put("/edit/:id",update)
 route.delete("/delete/:id",deleteData)
