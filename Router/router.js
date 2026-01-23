@@ -1,10 +1,10 @@
 import express from 'express'
 import { deleteData, insert, read, update } from '../Controller/Controller.js'
-import { loginUser, registerUser } from '../Controller/loginController.js'
+import { loginUser, registerUser, verifyToken } from '../Controller/loginController.js'
 
 const route = express.Router()
 
-route.get('/',read)
+route.get('/',verifyToken,read)
 
 route.post("/insert",insert)
 
